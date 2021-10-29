@@ -4,7 +4,7 @@
 
 * Thực thi một delegate
 	
-```
+```C#
 ShowLog log = null;
 log = Info;
 log("Hello world ! ");
@@ -18,7 +18,7 @@ log("Testing");
 
 * Thực hiện một chain các delegate
 
-```
+```C#
 ShowLog log = null;
 log += Info;
 log += Warning;
@@ -28,14 +28,14 @@ log?.Invoke("Testing");
 
 * `Action` là một delegate kiểu void.
 
-```
+```C#
 Action action // tương đương với delegate void FunctionABC()
 Action<string, int> action1 // Tương đương delegate void FunctionABC(string s, int i);
 
 ```
 
 Việc sử dụng `Action` sẽ hoàn toàn tương đương như ta khai báo tường minh với `delegate`
-```
+```C#
 Action<string> action2;
 action2 = Warning;
 action2 += Info;
@@ -46,7 +46,7 @@ action2?.Invoke("Testing.....");
 # 3. Func
 `Func` là một delegate có kiểu trả về, và có ít nhất là 1 kiểu trả về, kiểu trả về sẽ nằm cuối cùng trong chuỗi khai báo giữ cặp dấu `<>`
 
-```
+```C#
 // Khai bao môt delegate có kiểu trả về là int.
 // Tương đương với kiểu khai báo tường minh như sau: 
 // delegate int function1();
@@ -56,10 +56,9 @@ Func<int> function1;
 // Tương đương với khai báo tường minh như sau: 
 // delegate string function2(string s, double i);
 Func<string, double, string> function2;
-
 ```
 
-```
+```C#
 // Khai báo 2 functions bên ngoài
 static int Sum(int a, int b) => a + b;
 static int Sub(int a, int b) => a - b;
@@ -79,7 +78,7 @@ Console.WriteLine($"Hieu: {caculator(a, b)}");
 # 4. Sử dụng delegate với biểu thức lambda.
 
 Delegate trả về kiểu void và biểu thức lambda.
-```
+```C#
 // Biểu thức lambda có 1 tham số.
 Action<string> Nortification;
 Nortification = (string s) => Console.WriteLine(s);
@@ -102,7 +101,7 @@ welcome2?.Invoke("Hello","John");
 
 Delegate có kiểu trả về với biểu thức lambda.
 
-```
+```C#
 // Delegate có kiểu tra về với biểu thức lambda.
 Func<int, int, int> caculator;
 caculator = (a, b) => {
@@ -129,7 +128,7 @@ myArray.ToList().ForEach(x => {
 ```
 
 // Ta xây dựng một phương thức nhận vào một expression và thực hiện filter một mảng bằng expression đó.
-```
+```C#
 // Định nghĩa phương thức
 static List<int> FilterByPredicate(Func<int, bool> expression, int[] array)
 {

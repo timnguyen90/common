@@ -28,4 +28,24 @@ namespace Note
             return $"{{{JsonConvert.SerializeObject(_options)}}}";
         }
     }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string s = "Hello World !";
+            s.Print(ConsoleColor.Yellow);
+
+            var mystring = new JsonTemplateBuilder()
+                   .Add("timestamp", "UtcDateTime(@t)")
+                   .Add("timestamp", " @m")
+                   .Add("abc", "@bcd")
+                   .Add("1", "@11")
+                   .Add("2", "@22")
+                   .Build();
+
+            Console.WriteLine(mystring);
+            Console.ReadLine();
+        }
+    }
 }

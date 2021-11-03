@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31727.386
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLogDemo", "NLogDemo\NLogDemo.csproj", "{DAEA9EDA-639F-455C-8B15-76A3F9378007}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asp.Application.Nlog", "Asp.Application.Nlog\Asp.Application.Nlog.csproj", "{60EEEEEC-148D-4034-9061-D65D450C4F22}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DAEA9EDA-639F-455C-8B15-76A3F9378007}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAEA9EDA-639F-455C-8B15-76A3F9378007}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAEA9EDA-639F-455C-8B15-76A3F9378007}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAEA9EDA-639F-455C-8B15-76A3F9378007}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60EEEEEC-148D-4034-9061-D65D450C4F22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60EEEEEC-148D-4034-9061-D65D450C4F22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60EEEEEC-148D-4034-9061-D65D450C4F22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60EEEEEC-148D-4034-9061-D65D450C4F22}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5F7CEAE5-3E29-4C51-9DE7-F88F372F6AFD}
+	EndGlobalSection
+EndGlobal

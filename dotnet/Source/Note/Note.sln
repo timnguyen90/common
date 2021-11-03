@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtensionMethod", "Note\ExtensionMethod.csproj", "{CF74C7DF-FDEE-42D6-87AF-2914518E4CE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asynchronous", "Asynchronous\Asynchronous.csproj", "{613B8DD8-E33C-4380-8E4F-2870471A9C8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asynchronous", "Asynchronous\Asynchronous.csproj", "{613B8DD8-E33C-4380-8E4F-2870471A9C8E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DelegateActionFuncDemo", "DelegateActionFuncDemo\DelegateActionFuncDemo.csproj", "{3F07AC84-79E0-4644-AFB4-EC1317DEC688}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjection", "DependencyInjection\DependencyInjection.csproj", "{AFB30398-0C7F-41F8-80D2-66021AA6F30D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{613B8DD8-E33C-4380-8E4F-2870471A9C8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{613B8DD8-E33C-4380-8E4F-2870471A9C8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{613B8DD8-E33C-4380-8E4F-2870471A9C8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F07AC84-79E0-4644-AFB4-EC1317DEC688}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F07AC84-79E0-4644-AFB4-EC1317DEC688}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F07AC84-79E0-4644-AFB4-EC1317DEC688}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F07AC84-79E0-4644-AFB4-EC1317DEC688}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFB30398-0C7F-41F8-80D2-66021AA6F30D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFB30398-0C7F-41F8-80D2-66021AA6F30D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFB30398-0C7F-41F8-80D2-66021AA6F30D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFB30398-0C7F-41F8-80D2-66021AA6F30D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

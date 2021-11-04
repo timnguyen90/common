@@ -12,5 +12,10 @@ namespace Entities.Extensions
             services.AddDbContext<RepositoryContext>(opts => 
             opts.UseSqlServer(configuration.GetConnectionString("sqlConnection"),b => b.MigrationsAssembly("RespositoryPattern")));
         }
+
+        public static void ConfigureRepositoryManager(this IServiceCollection services)
+        {
+            services.AddScoped<IRepositoryManager, RepositoryManager>();
+        }
     }
 }

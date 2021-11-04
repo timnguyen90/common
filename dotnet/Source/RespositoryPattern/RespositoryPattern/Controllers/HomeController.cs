@@ -1,21 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Entities.Repositories;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RespositoryPattern.Models;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RespositoryPattern.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IRepositoryManager _repository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger , IRepositoryManager repository)
         {
             _logger = logger;
+            _repository = repository;
         }
 
         public IActionResult Index()

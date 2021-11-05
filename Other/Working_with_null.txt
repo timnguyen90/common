@@ -1,0 +1,73 @@
+.hasValue trả về true nếu có giá trị ngược lại trả về false.
+
+.Value, if we try to null => throw an exception.
+
+.GetValueOrDefault()
+=> get the value, if null => trả về giá trị mặc định của kiểu đó.
+
+.GetValueOrDefault(default) => trả về giá trị, if null = trả về giá trị mà ta đã ấn định trước đó (default).
+
+int i = 42;
+int? j = i;
+sẽ không có vấn đề gì vì sẽ không có sảy ra sự mất dữ liệu tại đây.
+
+nếu ta khai báo như sau 
+int ? i = 42;
+int j = i;// sẽ báo lỗi ngay lập tức và nó yêu cầu một sự ép kiểu tường mình như sau int j = (int)i;
+
+OVERVIEW OF C# NULL-CHECKING OPERATORS
+1:- Conditional Opeartor: ?:
+2:- Null-coalescing Operator: ??
+3:- Null-conditional Opeartor: ?. ?[
+thằng này được giới thiệu trong c# 6.0
+
+1: int days = player.DaySincelastLogin.HasValue? player.DaySincelastLogin.Value: -1;
+
+2: int days  = player.DaySincelastLogin ?? -1;
+3:
+Trong ví dụ sau khi ta dùng method check null 1 hay 2 điều sẽ vẫn nhận được exception  bằng cách implement như sau:
+PlayerCharacter player = null
+int days = player.DaySincelastLogin??-1;
+
+int days;
+if (player!=null){
+	// do something
+}else{
+days = -1;
+}
+
+// Thay vì viết như trên ta có thể viết lại như sau:
+int days = player?.DaySincelastLogin ?? -1;
+
+
+Using the null conditional operator with null array values
+Để check null cho các phần tử trong một aray ta dùng ?[
+
+PlayerCharacter[] players = new PlayerCharacter[3]{
+	new PlayerCharacter{Name = "Sarah"},
+	new PlayerCharacter(),
+	null
+};
+
+string p1 = players?[0]?.Name;
+// ở đây ta làm một lúc 2 công việc
+// đàu tiên ta dùng ?[ để xem liệu rằng từng phần tử trong array này có bị null hay không?
+// Sau đó ta dùng tới dấu ? thứ 2 để xem properties trong phần tử arrray thứ i này có bị null hay không
+
+string p2 = players?[1]?.Name;
+string p3 = players?[2]?.Name;
+
+Thread-Save Null Delegate Invocation
+Trong C# 6.0 có giới thiệu cho ta một systax để check null cho delegate như sau:
+Thay vì viết
+PropertyChangedEvenhandler eventHandler = PropertyChanged;
+if(eventHandler != null){
+	eventHandler(this, new PropertyChangedEvenArgs(...));
+}
+Thì ta có thể viết ngắn gọn hơn như sau:
+PropertyChanged?.Invoke(this, new PropertyChangedEvenArgs(...));
+
+
+
+
+

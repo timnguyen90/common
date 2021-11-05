@@ -1,0 +1,18 @@
+- Using async void is only appropriate for event handlers
+Methods marked as async task will automatically have a task returned without explocitly having to return anything.
+The task returne from an asynchronous metho is a reference to the operation, its result or potential errors.
+Always await your asynchronous methos at some point in the chain.
+Always use the await keyword to validate your tasks.
+Exceptions occurring in an async void methoid cannot be caught.
+Using async and await in asp.net means the web server can handle other requests.
+DO NOT 
+- Never use async void unless it's an event handler or delegate.
+- Never block an asynchronous operation by calling Result or Wait().
+DO
+- Always use async and await together
+- Always return a Task from an asynchronous method.
+- Always await an asynchronous method to validate the operation.
+- Use async and await all the way up the chain.
+
+-------------------
+Task represents an asynchronous operation.

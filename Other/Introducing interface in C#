@@ -1,0 +1,141 @@
+Scenario 1: sử dụng concrete class.
+Ta định nghĩa một class tên là ConcreteRegularPolygon để dùng cho các đa giác điều (đa giác điều là đa giác có các cạnh bằng nhau).
+Trong class này ta có
+NumberOfSides: Dùng để cho biết số cạnh của đa giác này.
+SideLength: Dùng để cho biết chiều dày của một cạnh.
+GetPerimeter: Dùng để tính chu vi của đa giác đó, đối với đa giác điều thì công thức tính chu vi là số cạnh nhân với chiều dài một cạnh.
+GetArea: Dùng để tính diện tích của đa giác điều, ở đây ta định nghĩa phương thức này là ảo (virtual) để chỉ ra rằng tùy vào loại đa giác điều cụ thể nào thì nó sẽ override lại phương thức này đối với công thức tính diện tích của nó, nếu nó không override lại thì ta ném một ngoại lệ (exeption) vô mặt thằng implement.
+
+[sourcecode language="csharp"]
+public class ConcreteRegularPolygon
+{
+    public int NumberOfSides { get; set; }
+    public int SideLength { get; set; }
+ 
+    public ConcreteRegularPolygon(int sides, int length)
+    {
+        NumberOfSides = sides;
+        SideLength = length;
+    }
+ 
+    public double GetPerimeter()
+    {
+        return NumberOfSides * SideLength;
+    }
+ 
+    public virtual double GetArea()
+    {
+        throw new NotImplementedException();
+    }
+}
+[/sourcecode]
+
+Bây giờ ta tạo một class tên là Square kế thừa từ thằng ConcreteRegularPolygon, ta biết rằng square là một thực thể cụ thể của thằng ConcreteRegularPolygon (Hình vuông là một đa giác điều, tổ tiên đã nói vậy thì đừng cãi nhé ).
+Đối với class này ta làm như sau:
+-	Lúc khởi tạo ta chỉ ra nó có 4 cạnh và chiều dài của một cạnh.
+-	Ta override lại phương thức GetArea(), đối với hình vuông, công thức tính diện tích là bình phương của một cạnh. 
+[sourcecode language="csharp"]
+public class Square : ConcreteRegularPolygon
+{
+    public Square(int length) :
+        base(4, length)
+    { }
+ 
+    public override double GetArea()
+    {
+        return SideLength * SideLength;
+    }
+}
+[/sourcecode]
+
+Tới lúc này mọi chuyện rất haappy, Khi ta chạy chương trình, nó sẽ tính được chu vi và diện tích theo yêu cầu của ta một cách smoothly.
+Vậy chuyện gì sẽ xảy ra khi ta bỏ đi phương thức GetArea() trong class Square? Khi ta biên dịch chương trình thì chả có gì bất ổn cả, compiler rất happy với cách ta implement class Square mà không override lại method GetArea().
+Nhưng khi ta chạy chương trình thì nó lại phát sinh ra lỗi, bởi vì Square kế thừa từ class ConcreteRegularPolygon nhưng lại không override lại phương thức GetArea() của lớp này, do vậy ta sẽ nhận được một throw new NotImplementedException(); của anh ConcreteRegularPolygon.
+
+Note: Vậy từ những điều bên trên ta rút ra được là nếu ta nếu ta sử dụng cách implement theo concrete thì nó không ép buộc ta phải implement những thằng virtual khi ta biên dịch, đến khi ta chạy thì nó sẽ phát sinh ra exeception.
+
+Scenario 2: Sử dụng abstract class. 
+Ta định nghĩa một abstract class AbstractRegularPolygon như sau:
+
+[sourcecode language="csharp"]
+public abstract class AbstractRegularPolygon
+{
+    public int NumberOfSides { get; set; }
+    public int SideLength { get; set; }
+ 
+    public AbstractRegularPolygon(int sides, int length)
+    {
+        NumberOfSides = sides;
+        SideLength = length;
+    }
+ 
+    public double GetPerimeter()
+    {
+        return NumberOfSides * SideLength;
+    }
+ 
+    public abstract double GetArea();
+}
+[/sourcecode]
+
+Bây giờ ta định nghĩa một class khác có tên là Triangle như sau: 
+(tam giác điều cũng là một thực thể cụ thể của một đa giác điều)
+
+[sourcecode language="csharp"]
+public class Triangle : AbstractRegularPolygon
+{
+    public Triangle(int length) :
+        base(3, length)
+    { }
+ 
+    public override double GetArea()
+    {
+        return SideLength * SideLength * Math.Sqrt(3) / 4;
+    }
+}
+[/sourcecode]
+
+Khi ta chạy chương trình để tính chu vi và diện thích của một triangle, mọi thứ điều rất good và happy.
+Khi ta bỏ đi method GetArea() trong class Triangle, thì ngay lập tức compiler ném một cục lỗi (compile-time error) vào mặt ta với nội dung “Ê thằng ngu! Mày không implement một thành phần abstract mà mày kế thừa kìa!”. Đây là một điểm khác biệt giữa concrete và abstract class (nếu ta được chọn lựa giữa run-time error và compile-time error thì chắc hẵng compile-time error vẫn tốt hơn chứ nhỉ?).
+Scenario 3: Sử dụng interface.
+Ta xem interface như là một contract, do vậy tất cả điều phải nhìn thấy được, nghĩa là tất cả các thành phần bên trong điều có access modifier là public, mặt khác nếu một method bên trong một interface thì nó chỉ là tên định nghĩa chứ không có phần định nghĩa thực thi, đây chính là điểm khác biệt giữa interface và abstract class.
+Nếu một class implement một interface thì nó phải implement hết tất các những nhứ có bên trong interface mà nó implement.
+
+[sourcecode language="csharp"]
+public interface IRegularPolygon
+{
+    int NumberOfSides { get; set; }
+    int SideLength { get; set; }
+ 
+    double GetPerimeter();
+    double GetArea();
+}
+[/sourcecode]
+
+Tiếp theo ta định nghĩa một class tên là  implement từ IRegularPolygon như sau:
+
+[sourcecode language="csharp"]
+public class Octagon :  IRegularPolygon
+{
+    public int NumberOfSides { get; set; }
+    public int SideLength { get; set; }
+ 
+    public Octagon(int length)
+    {
+        NumberOfSides = 8;
+        SideLength = length;
+    }
+ 
+    public double GetPerimeter()
+    {
+        return NumberOfSides * SideLength;
+    }
+ 
+    public double GetArea()
+    {
+        return SideLength * SideLength * (2 + 2 * Math.Sqrt(2));
+    }
+}
+[/sourcecode]
+
+Đến lúc này khi ta run program và thực hiện tính chu vi và diện tích cho thằng octagon thì mọi thứ work well, Ở class Octagon nếu ta không implement một thành phần nào đó của interface thì compiler lập tức báo lỗi tương tự như đối với abstract class.

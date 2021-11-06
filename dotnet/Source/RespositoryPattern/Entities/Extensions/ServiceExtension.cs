@@ -1,4 +1,6 @@
 ﻿using Entities.Repositories;
+using Logging;
+using Logging.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,5 +19,8 @@ namespace Entities.Extensions
         {
             services.AddScoped<IRepositoryManager, RepositoryManager>();
         }
+
+        public static void ConfigureLoggerService(this IServiceCollection service)
+            => service.AddScoped<ILoggerManager, LoggerManager>();
     }
 }

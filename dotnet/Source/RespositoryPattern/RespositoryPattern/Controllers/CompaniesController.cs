@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using Entities.DTO;
+using Logging.Interfaces;
 
 namespace RespositoryPattern.Controllers
 {
@@ -11,10 +12,12 @@ namespace RespositoryPattern.Controllers
     public class CompaniesController : ControllerBase
     {
         private readonly IRepositoryManager _repository;
+        private readonly ILoggerManager _logger;
 
-        public CompaniesController(IRepositoryManager repository)
+        public CompaniesController(IRepositoryManager repository, ILoggerManager logger)
         {
             _repository = repository;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -34,7 +37,7 @@ namespace RespositoryPattern.Controllers
             }
             catch (Exception ex)
             {
-                // logging the error here.
+                _logger.LogError($"Error in the {nameof(GetCompanies)}{ex}");
                 return StatusCode(500, "Internal server error");
             }
         }

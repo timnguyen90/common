@@ -1,4 +1,5 @@
-﻿using Entities.Repositories;
+﻿using Entities.OutputFormatter;
+using Entities.Repositories;
 using Logging;
 using Logging.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -22,5 +23,10 @@ namespace Entities.Extensions
 
         public static void ConfigureLoggerService(this IServiceCollection service)
             => service.AddScoped<ILoggerManager, LoggerManager>();
+
+        public static IMvcBuilder AddCustomCSVFormatter(this IMvcBuilder builder)
+        {
+            return builder.AddMvcOptions(config => config.OutputFormatters.Add(new CsvOutputFormatter()));
+        }
     }
 }

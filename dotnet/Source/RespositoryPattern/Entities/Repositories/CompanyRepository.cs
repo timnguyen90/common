@@ -12,15 +12,20 @@ namespace Entities.Repositories
         {
         }
 
-        public IEnumerable<Company> GetAllCompanies(bool trackchanges)
+        public IEnumerable<Company> GetAllCompanies(bool trackChanges)
         {
-            return FindAll(trackchanges).OrderBy(c => c.Name).ToList();
+            return FindAll(trackChanges).OrderBy(c => c.Name).ToList();
         }
 
         public Company GetCompany(Guid companyId, bool trackChanges)
         {
             return FindByConditon(c => c.Id.Equals(companyId), trackChanges)
                 .SingleOrDefault();
+        }
+
+        public void CreateCompany(Company company)
+        {
+            Create(company);
         }
     }
 }

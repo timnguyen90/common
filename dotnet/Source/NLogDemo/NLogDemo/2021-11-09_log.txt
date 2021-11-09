@@ -101,3 +101,4 @@ Error Number:515,State:2,Class:16
    at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
 2021-11-09 23:07:40.4127 INFO Employee with id: e4c5ca50-c4c1-43a7-166c-08d9a323076c doesn't exist in the database.
+2021-11-09 23:39:54.8727 INFO Company with id: 287c4759-0edf-4685-1fe0-08d9a212f9de doesn't exist in the database.

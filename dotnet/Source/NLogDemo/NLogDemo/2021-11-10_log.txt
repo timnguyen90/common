@@ -1,0 +1,1 @@
+2021-11-10 01:55:00.9027 INFO Company with id: 287c4759-0edf-4685-1fe0-08d9a212f9de doesn't exist in the database.

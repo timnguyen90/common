@@ -27,5 +27,10 @@ namespace Entities.Repositories
         {
             Create(company);
         }
+
+        public IEnumerable<Company> GetByIds(IEnumerable<Guid> ids, bool trackChanges)
+        {
+            return FindByConditon(x=>ids.Contains(x.Id), trackChanges).ToList();
+        }
     }
 }

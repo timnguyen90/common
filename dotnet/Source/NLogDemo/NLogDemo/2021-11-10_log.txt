@@ -1,1 +1,11 @@
 2021-11-10 01:55:00.9027 INFO Company with id: 287c4759-0edf-4685-1fe0-08d9a212f9de doesn't exist in the database.
+2021-11-10 19:55:11.7320 INFO Company with id: 53a1237a-3ed3-4462-b9f0-5a7bb1056a33 doesn't exist in the database.
+2021-11-10 19:56:26.4009 INFO Company with id: 53a1237a-3ed3-4462-b9f0-5a7bb1056a33 doesn't exist in the database.
+2021-11-10 19:56:52.7056 INFO Company with id: 53a1237a-3ed3-4462-b9f0-5a7bb1056a33 doesn't exist in the database.
+2021-11-10 19:57:13.4297 INFO Company with id: 53a1237a-3ed3-4462-b9f0-5a7bb1056a33 doesn't exist in the database.
+2021-11-10 19:57:18.4658 INFO Company with id: 53a1237a-3ed3-4462-b9f0-5a7bb1056a33 doesn't exist in the database.
+2021-11-10 19:57:30.8745 INFO Company with id: 53a1237a-3ed3-4462-b9f0-5a7bb1056a33 doesn't exist in the database.
+2021-11-10 19:58:29.1621 INFO Company with id: 53a1237a-3ed3-4462-b9f0-5a7bb1056a33 doesn't exist in the database.
+2021-11-10 21:46:43.9522 ERROR Invalid model state for the EmployeeForCreationDto object
+2021-11-10 22:13:53.0894 ERROR Invalid model state for the EmployeeForCreationDto object
+2021-11-10 22:40:54.2084 ERROR Invalid model state for the EmployeeForUpdateDto object

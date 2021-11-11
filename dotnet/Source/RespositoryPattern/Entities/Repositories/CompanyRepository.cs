@@ -2,6 +2,8 @@
 using Entities.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Entities.Repositories
 {
@@ -12,15 +14,15 @@ namespace Entities.Repositories
         {
         }
 
-        public IEnumerable<Company> GetAllCompanies(bool trackChanges)
+        public async Task<IEnumerable<Company>> GetAllCompaniesAsync(bool trackChanges)
         {
-            return FindAll(trackChanges).OrderBy(c => c.Name).ToList();
+            return await FindAll(trackChanges).OrderBy(c => c.Name).ToListAsync();
         }
 
-        public Company GetCompany(Guid companyId, bool trackChanges)
+        public async Task<Company> GetCompanyAsync(Guid companyId, bool trackChanges)
         {
-            return FindByConditon(c => c.Id.Equals(companyId), trackChanges)
-                .SingleOrDefault();
+            return await FindByConditon(c => c.Id.Equals(companyId), trackChanges)
+                .SingleOrDefaultAsync();
         }
 
         public void CreateCompany(Company company)
@@ -28,9 +30,9 @@ namespace Entities.Repositories
             Create(company);
         }
 
-        public IEnumerable<Company> GetByIds(IEnumerable<Guid> ids, bool trackChanges)
+        public async Task<IEnumerable<Company>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges)
         {
-            return FindByConditon(x=>ids.Contains(x.Id), trackChanges).ToList();
+            return await FindByConditon(x=>ids.Contains(x.Id), trackChanges).ToListAsync();
         }
 
         public void DeleteCompany(Company company)

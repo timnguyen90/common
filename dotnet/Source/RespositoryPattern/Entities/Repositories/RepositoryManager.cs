@@ -1,4 +1,6 @@
-﻿namespace Entities.Repositories
+﻿using System.Threading.Tasks;
+
+namespace Entities.Repositories
 {
     public class RepositoryManager : IRepositoryManager
     {
@@ -31,9 +33,9 @@
             }
         }
 
-        public void Save()
+        public Task SaveAsync()
         {
-            _repositoryContext.SaveChanges();
+            return _repositoryContext.SaveChangesAsync();
         }
     }
 }

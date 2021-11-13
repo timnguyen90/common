@@ -1,4 +1,5 @@
 using System.IO;
+using Entities.ActionFilters;
 using Entities.Extensions;
 using Logging;
 using Logging.Interfaces;
@@ -30,6 +31,8 @@ namespace RespositoryPattern
             services.ConfigureRepositoryManager();
             services.ConfigureLoggerService();
             services.AddAutoMapper(typeof(Startup));
+
+            services.AddScoped<ValidationFilterAttribute>();
 
             services.Configure<ApiBehaviorOptions>(options =>
             {

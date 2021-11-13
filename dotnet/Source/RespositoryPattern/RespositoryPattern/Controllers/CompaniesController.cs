@@ -121,6 +121,12 @@ namespace RespositoryPattern.Controllers
         public async Task<IActionResult> UpdateCompany(Guid id, [FromBody] CompanyForUpdateDto company)
         {
             var companyEntity = await _repository.Company.GetCompanyAsync(id, trackChanges: true);
+            if (company == null)
+            {
+                _logger.LogInfo($"Company with id: {id} doesn't exist in the database");
+                return NotFound();
+            }
+
             _mapper.Map(company, companyEntity);
             await _repository.SaveAsync();
 

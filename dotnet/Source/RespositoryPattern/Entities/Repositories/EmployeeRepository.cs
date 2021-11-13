@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Entities.Models;
+using Entities.RequestFeatures;
 using Microsoft.EntityFrameworkCore;
 
 namespace Entities.Repositories
@@ -14,10 +14,11 @@ namespace Entities.Repositories
         { 
         }
 
-        public async Task<IEnumerable<Employee>> GetEmployeesAsync(Guid companyId, bool trackChanges)
+        public async Task<PageList<Employee>> GetEmployeesAsync(Guid companyId, EmployeeParameters employeeParameters,  bool trackChanges)
         {
-            return await FindByConditon(e => e.CompanyId.Equals(companyId), trackChanges)
+            var employees = await FindByConditon(e => e.CompanyId.Equals(companyId), trackChanges)
                 .OrderBy(e => e.Name).ToListAsync();
+            return PageList<Employee>.ToPageList(employees, employeeParameters.PageNumber, employeeParameters.PageSize);
         }
 
         public async Task<Employee> GetEmployeeAsync(Guid companyId, Guid id, bool trackChanges)

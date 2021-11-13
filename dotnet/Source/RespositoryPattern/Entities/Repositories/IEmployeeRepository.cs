@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Entities.Models;
+using Entities.RequestFeatures;
 
 namespace Entities.Repositories
 {
     public interface IEmployeeRepository
     {
-        Task<IEnumerable<Employee>> GetEmployeesAsync(Guid companyId, bool trackChanges);
+        Task<PageList<Employee>> GetEmployeesAsync(Guid companyId, EmployeeParameters employeeParameters, bool trackChanges);
         
         Task<Employee> GetEmployeeAsync(Guid companyId, Guid id, bool trackChanges);
         

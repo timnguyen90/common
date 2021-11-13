@@ -9,6 +9,8 @@ using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using System.Threading.Tasks;
 using Entities.ActionFilters;
+using Entities.RequestFeatures;
+using Newtonsoft.Json;
 
 namespace RespositoryPattern.Controllers
 {
@@ -27,7 +29,7 @@ namespace RespositoryPattern.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> GetEmployeesForCompany(Guid companyId)
+        public async Task<IActionResult> GetEmployeesForCompany(Guid companyId, [FromQuery]EmployeeParameters employeeParameters)
         {
             var company = await _repository.Company.GetCompanyAsync(companyId, trackChanges: false);
             if (company == null)
@@ -36,7 +38,10 @@ namespace RespositoryPattern.Controllers
                 return NotFound();
             }
 
-            var employees = await _repository.Employee.GetEmployeesAsync(companyId, trackChanges: false);
+            var employees = await _repository.Employee.GetEmployeesAsync(companyId, employeeParameters, trackChanges: false);
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(employees.MetaData));
+
             var employeesDto = _mapper.Map<IEnumerable<EmployeeDto>>(employees);
             return Ok(employeesDto);
         }

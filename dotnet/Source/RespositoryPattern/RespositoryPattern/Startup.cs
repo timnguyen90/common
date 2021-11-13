@@ -33,6 +33,8 @@ namespace RespositoryPattern
             services.AddAutoMapper(typeof(Startup));
 
             services.AddScoped<ValidationFilterAttribute>();
+            services.AddScoped<ValidateCompanyExistsAttribute>();
+            services.AddScoped<ValidateEmployeeForCompanyExistsAttribute>();
 
             services.Configure<ApiBehaviorOptions>(options =>
             {

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Entities.Models;
 using Entities.RequestFeatures;
 using Microsoft.EntityFrameworkCore;
+using Entities.Extensions;
 
 namespace Entities.Repositories
 {
@@ -17,6 +18,7 @@ namespace Entities.Repositories
         public async Task<PageList<Employee>> GetEmployeesAsync(Guid companyId, EmployeeParameters employeeParameters,  bool trackChanges)
         {
             var employees = await FindByConditon(e => e.CompanyId.Equals(companyId) && (e.Age >= employeeParameters.MinAge && e.Age<=employeeParameters.MaxAge), trackChanges)
+                .Search(employeeParameters.SearchTerm)
                 .OrderBy(e => e.Name).ToListAsync();
 
             return PageList<Employee>

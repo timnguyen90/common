@@ -16,9 +16,11 @@ namespace Entities.Repositories
 
         public async Task<PageList<Employee>> GetEmployeesAsync(Guid companyId, EmployeeParameters employeeParameters,  bool trackChanges)
         {
-            var employees = await FindByConditon(e => e.CompanyId.Equals(companyId), trackChanges)
+            var employees = await FindByConditon(e => e.CompanyId.Equals(companyId) && (e.Age >= employeeParameters.MinAge && e.Age<=employeeParameters.MaxAge), trackChanges)
                 .OrderBy(e => e.Name).ToListAsync();
-            return PageList<Employee>.ToPageList(employees, employeeParameters.PageNumber, employeeParameters.PageSize);
+
+            return PageList<Employee>
+                .ToPageList(employees, employeeParameters.PageNumber, employeeParameters.PageSize);
         }
 
         public async Task<Employee> GetEmployeeAsync(Guid companyId, Guid id, bool trackChanges)

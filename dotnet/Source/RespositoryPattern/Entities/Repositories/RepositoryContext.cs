@@ -14,7 +14,6 @@ namespace Entities.Repositories
         {
             modelBuilder.ApplyConfiguration(new CompanyConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
-
         }
 
         public DbSet<Company> Companies { get; set; }

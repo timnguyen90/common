@@ -1,5 +1,7 @@
 using System.IO;
 using Entities.ActionFilters;
+using Entities.DataShaping;
+using Entities.DTO;
 using Entities.Extensions;
 using Logging;
 using Logging.Interfaces;
@@ -35,7 +37,7 @@ namespace RespositoryPattern
             services.AddScoped<ValidationFilterAttribute>();
             services.AddScoped<ValidateCompanyExistsAttribute>();
             services.AddScoped<ValidateEmployeeForCompanyExistsAttribute>();
-
+            services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;

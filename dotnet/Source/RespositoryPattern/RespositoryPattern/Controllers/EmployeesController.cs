@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Entities.ActionFilters;
 using Entities.RequestFeatures;
 using Newtonsoft.Json;
+using Entities.DataShaping;
 
 namespace RespositoryPattern.Controllers
 {
@@ -21,12 +22,14 @@ namespace RespositoryPattern.Controllers
         private readonly IRepositoryManager _repository;
         private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
+        private readonly IDataShaper<EmployeeDto> _datashaper;
 
-        public EmployeesController(IRepositoryManager repository, ILoggerManager logger, IMapper mapper)
+        public EmployeesController(IRepositoryManager repository, ILoggerManager logger, IMapper mapper, IDataShaper<EmployeeDto> dataShaper)
         {
             _repository = repository;
             _logger = logger;
             _mapper = mapper;
+            _datashaper = dataShaper;
         }
 
         public async Task<IActionResult> GetEmployeesForCompany(Guid companyId, [FromQuery] EmployeeParameters employeeParameters)
@@ -44,11 +47,10 @@ namespace RespositoryPattern.Controllers
             }
 
             var employees = await _repository.Employee.GetEmployeesAsync(companyId, employeeParameters, trackChanges: false);
-
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(employees.MetaData));
-
             var employeesDto = _mapper.Map<IEnumerable<EmployeeDto>>(employees);
-            return Ok(employeesDto);
+
+            return Ok(_datashaper.ShapeData(employeesDto, employeeParameters.Fields));
         }
 
         [HttpGet("{id}", Name ="GetEmployeeForCompany")]

@@ -21,7 +21,7 @@ namespace Entities.Repositories
                 .FilterEmployees(employeeParameters.MinAge, employeeParameters.MaxAge)
                 .Search(employeeParameters.SearchTerm)
                 .Sort(employeeParameters.OrderBy)
-                .OrderBy(e => e.Name).ToListAsync();
+                .ToListAsync();
 
             return PageList<Employee>
                 .ToPageList(employees, employeeParameters.PageNumber, employeeParameters.PageSize);

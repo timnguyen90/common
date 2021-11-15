@@ -1,8 +1,7 @@
 ﻿using Entities.Models;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Linq.Dynamic.Core;
+using Entities.Utility;
 
 namespace Entities.Extensions
 {
@@ -32,30 +31,7 @@ namespace Entities.Extensions
                 return employees.OrderBy(e => e.Name);
             }
 
-            var orderParams = orderByQueryString.Trim().Split(',');
-            var propertyInfors = typeof(Employee).GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            var orderQueryBuilder = new StringBuilder();
-
-            foreach (var param in orderParams)
-            {
-                if (string.IsNullOrWhiteSpace(param))
-                {
-                    continue;
-                }
-
-                var propertyFromQueryName = param.Split(" ")[0];
-                var objectProperty = propertyInfors.FirstOrDefault(pi => pi.Name.Equals(propertyFromQueryName, System.StringComparison.InvariantCultureIgnoreCase));
-
-                if(objectProperty == null)
-                {
-                    continue;
-                }
-
-                var direction = param.EndsWith(" desc") ? "descending" : "ascending";
-                orderQueryBuilder.Append($"{objectProperty.Name} {direction},");
-            }
-
-            var orderQuery = orderQueryBuilder.ToString().TrimEnd(',', ' ');
+            var orderQuery = OrderQueryBuilder.CreateOrderQuery<Employee>(orderByQueryString);
 
             if (string.IsNullOrWhiteSpace(orderQuery))
             {

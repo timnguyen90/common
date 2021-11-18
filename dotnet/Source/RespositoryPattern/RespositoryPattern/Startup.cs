@@ -3,6 +3,7 @@ using Entities.ActionFilters;
 using Entities.DataShaping;
 using Entities.DTO;
 using Entities.Extensions;
+using Entities.Utility;
 using Logging;
 using Logging.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -38,6 +39,8 @@ namespace RespositoryPattern
             services.AddScoped<ValidateCompanyExistsAttribute>();
             services.AddScoped<ValidateEmployeeForCompanyExistsAttribute>();
             services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
+            services.AddScoped<ValidateMediaTypeAttribute>();
+            services.AddScoped<EmployeeLinks>();
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;
@@ -50,6 +53,7 @@ namespace RespositoryPattern
             }).AddNewtonsoftJson()
               .AddXmlDataContractSerializerFormatters()
               .AddCustomCSVFormatter();
+            services.AddCustomMediaTypes();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

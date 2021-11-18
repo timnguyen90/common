@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Entities.ActionFilters;
 using Entities.RequestFeatures;
 using Newtonsoft.Json;
-using Entities.DataShaping;
+using Entities.Utility;
 
 namespace RespositoryPattern.Controllers
 {
@@ -22,16 +22,18 @@ namespace RespositoryPattern.Controllers
         private readonly IRepositoryManager _repository;
         private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
-        private readonly IDataShaper<EmployeeDto> _datashaper;
+        private readonly EmployeeLinks _employeeLinks;
 
-        public EmployeesController(IRepositoryManager repository, ILoggerManager logger, IMapper mapper, IDataShaper<EmployeeDto> dataShaper)
+        public EmployeesController(IRepositoryManager repository, ILoggerManager logger, IMapper mapper, EmployeeLinks employeeLinks)
         {
             _repository = repository;
             _logger = logger;
             _mapper = mapper;
-            _datashaper = dataShaper;
+            _employeeLinks = employeeLinks;
         }
 
+        [HttpGet]
+        [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
         public async Task<IActionResult> GetEmployeesForCompany(Guid companyId, [FromQuery] EmployeeParameters employeeParameters)
         {
             if (!employeeParameters.ValidAgeRange)
@@ -50,7 +52,9 @@ namespace RespositoryPattern.Controllers
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(employees.MetaData));
             var employeesDto = _mapper.Map<IEnumerable<EmployeeDto>>(employees);
 
-            return Ok(_datashaper.ShapeData(employeesDto, employeeParameters.Fields));
+            var links = _employeeLinks.TryGenerateLinks(employeesDto, employeeParameters.Fields, companyId, HttpContext);
+
+            return links.HasLinks ? Ok(links.LinkedEntities) : Ok(links.ShapedEntities);
         }
 
         [HttpGet("{id}", Name ="GetEmployeeForCompany")]

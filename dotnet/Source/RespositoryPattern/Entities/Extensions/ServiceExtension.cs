@@ -43,6 +43,8 @@ namespace Entities.Extensions
                 {
                     newtonsoftJsonOutputFormatter.SupportedMediaTypes
                     .Add("application/vnd.codemaze.hateoas+json");
+                    newtonsoftJsonOutputFormatter.SupportedMediaTypes
+                    .Add("application/vnd.codemaze.apiroot");
                 }
 
                 var xmlOutputFormatter = config.OutputFormatters
@@ -52,6 +54,8 @@ namespace Entities.Extensions
                 {
                     xmlOutputFormatter.SupportedMediaTypes
                     .Add("application/vnd.codemaze.hateoas+xml");
+                    xmlOutputFormatter.SupportedMediaTypes
+                    .Add("application/vnd.codemaze.apiroot");
                 }
             });
         }

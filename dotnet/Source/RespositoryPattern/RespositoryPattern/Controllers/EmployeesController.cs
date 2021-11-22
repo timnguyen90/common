@@ -33,6 +33,7 @@ namespace RespositoryPattern.Controllers
         }
 
         [HttpGet]
+        [HttpHead]
         [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
         public async Task<IActionResult> GetEmployeesForCompany(Guid companyId, [FromQuery] EmployeeParameters employeeParameters)
         {

@@ -28,6 +28,22 @@ namespace RespositoryPattern.Controllers
             _logger = logger;
         }
 
+        [HttpOptions]
+        public IActionResult GetCompaniesOptions()
+        {
+            Response.Headers.Add("Allow", "GET, OPTIONS, POST");
+            return Ok();
+        }
+
+        [HttpOptions]
+        [Route("{id}")]
+        public IActionResult GetCompaniesOptions(Guid id)
+        {
+            Response.Headers.Add("Allow", "GET, OPTIONS, POST, PUT, DELETE");
+            return Ok();
+        }
+
+
         [HttpGet]
         public async Task<IActionResult> GetCompanies()
         {

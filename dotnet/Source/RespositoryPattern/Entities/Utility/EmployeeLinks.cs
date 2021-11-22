@@ -84,5 +84,4 @@ namespace Entities.Utility
             return new LinkResponse { ShapedEntities = shapedEmployees };
         }
     }
-
 }

@@ -1,4 +1,5 @@
-# The personal note includes:
+# COMMON NOTES
+
 ## 1. Angular
 
 ## 2. Docker
@@ -9,5 +10,9 @@
 
 ## 5. Javascript
 
-## 6. Other
+## 6. Interview
+
+## 7. Unit Test
+
+## 8. Other
 

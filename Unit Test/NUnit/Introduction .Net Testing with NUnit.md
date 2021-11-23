@@ -1,5 +1,74 @@
 # .NET TESTING WITH Nunit 3
 
+- [.NET TESTING WITH Nunit 3](#net-testing-with-nunit-3)
+- [1. Understanding NUnit Tests.](#1-understanding-nunit-tests)
+  - [1.1 NUnit Attributes overview](#11-nunit-attributes-overview)
+  - [2. NUnit Assertions overview](#2-nunit-assertions-overview)
+  - [3. The logical Arrange, Act, Assert test phrases.](#3-the-logical-arrange-act-assert-test-phrases)
+  - [4. Asserting on different types of results](#4-asserting-on-different-types-of-results)
+    - [4.1 The Nunit Constrain Model of Assertings.](#41-the-nunit-constrain-model-of-assertings)
+    - [4.2 Asserting on Equality](#42-asserting-on-equality)
+    - [4.3 Asserting on reference equality](#43-asserting-on-reference-equality)
+    - [4.4 Adding custom failure message.](#44-adding-custom-failure-message)
+    - [4.5 Asserting on floating point value.](#45-asserting-on-floating-point-value)
+    - [4.6 Asserting on collection content.](#46-asserting-on-collection-content)
+    - [4.7 Asserting That Exceptions Are Thrown](#47-asserting-that-exceptions-are-thrown)
+    - [4.8 Other Asertion examples](#48-other-asertion-examples)
+  - [5. Controlling Test Execution](#5-controlling-test-execution)
+    - [5.1 Ignoring Tests](#51-ignoring-tests)
+    - [5.2 Organizing tests into categories](#52-organizing-tests-into-categories)
+    - [5.3 An Overview of the test execution lifecycle.](#53-an-overview-of-the-test-execution-lifecycle)
+    - [5.4 Running Code before and after Each Test](#54-running-code-before-and-after-each-test)
+    - [5.5 Running Code before and after Each Test Class](#55-running-code-before-and-after-each-test-class)
+  - [6 Creating data driven tests and reducing test code duplication.](#6-creating-data-driven-tests-and-reducing-test-code-duplication)
+    - [6.1 Providing Method Level Test Data](#61-providing-method-level-test-data)
+    - [6.2 Simplifying TestCase Expected Values](#62-simplifying-testcase-expected-values)
+    - [6.3 Sharing Test Data across Multiple Tests](#63-sharing-test-data-across-multiple-tests)
+    - [6.4 Reading Test Data from External Sources](#64-reading-test-data-from-external-sources)
+    - [6.5 Generating Test Data](#65-generating-test-data)
+    - [6.6 Creating Custom Category Attributes](#66-creating-custom-category-attributes)
+    - [6.7 Creating Custom constraints](#67-creating-custom-constraints)
+
+# 1. Understanding NUnit Tests.
+
+## 1.1 NUnit Attributes overview
+
+![picture](./images/1.PNG)
+
+## 2. NUnit Assertions overview
+
+`Assert` có hai kiểu là **Constraint Model (newer)** và **Classic Model (older)**.
+
+**Classic Model** vẫn được support nhưng nó sẽ không được thêm các tính năng mới.
+
+**Constraint Model** nên được dùng vì sẽ được access toàn bộ các capabilites của NUnit.
+
+![picture](./images/2.PNG)
+
+## 3. The logical Arrange, Act, Assert test phrases.
+
+Trong unit test thì có 3 thành phần, nhưng trong trường hợp thực tế không phải lúc nào ta cũng phải đủ cả 3 thành phần bên dưới cả.
+
+**Arange:** Set up test object(s), initialize, test data...
+
+**Act:** call method, set property, ...
+
+**Assert:** compare returned value/ end state with exprected.
+
+```c#
+[Test]
+public void ReturnTermInMonths()
+{
+    // Arrange
+    var sut= new LoanTerm(1);
+    // Act
+    var numberOfMonths= sut.ToMonths();
+    // Assert
+    Assert.That(numberOfMonths, Is.EqualTo(12));            
+}
+
+```
+
 ## 4. Asserting on different types of results
 
 ### 4.1 The Nunit Constrain Model of Assertings.

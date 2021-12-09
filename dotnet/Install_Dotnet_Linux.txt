@@ -1,0 +1,67 @@
+
+GIT
+
+sudo apt update
+
+sudo apt install git
+
+git --version
+
+git config --global user.name "Your Name"
+git config --global user.email "youremail@domain.com"
+
+git config --list
+
+
+NODEJS
+
+sudo apt update
+sudo apt install nodejs
+node -v
+
+sudo apt install npm
+
+npm -v
+
+
+.NET CORE
+
+https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#2104-
+
+wget https://packages.microsoft.com/config/ubuntu/21.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+
+sudo apt-get update; \
+  sudo apt-get install -y apt-transport-https && \
+  sudo apt-get update && \
+  sudo apt-get install -y dotnet-sdk-6.0
+  
+rm packages-microsoft-prod.deb
+
+
+dotnet --version
+
+
+
+DOCKER
+
+sudo apt update
+
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+
+apt-cache policy docker-ce
+
+sudo apt install docker-ce
+
+sudo systemctl status docker
+
+docker run hello-world
+
+docker --version
+
+  
+  
